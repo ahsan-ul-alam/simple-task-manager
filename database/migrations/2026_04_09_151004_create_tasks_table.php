@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('title');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->date('due_date')->nullable();
             $table->enum('priority', ['low', 'medium', 'high'])->default('low')->nullable();
             $table->string('note')->nullable();
