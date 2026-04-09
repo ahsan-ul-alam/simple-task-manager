@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('title');
             $table->string('description');
-            $table->date('due_date');
+            $table->date('due_date')->nullable();
             $table->enum('priority', ['low', 'medium', 'high'])->default('low')->nullable();
             $table->string('note')->nullable();
             $table->enum('status', ['pending', 'in_progress', 'completed'])->default('pending');
