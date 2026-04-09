@@ -67,7 +67,7 @@
 </div>
 
 <div class="flex items-center justify-end gap-3 pt-4">
-    <a href="{{ route('tasks.index') }}"
+    <a href="{{ route('dashboard') }}"
         class="rounded-xl border border-gray-300 px-5 py-2.5 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition">
         Cancel
     </a>
