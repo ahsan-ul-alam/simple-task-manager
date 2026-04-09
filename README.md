@@ -1,58 +1,210 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🧩 Task Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Technical Assessment – Full Stack Laravel Developer (Qtec Solution Limited)**
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📌 Overview
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+This project is a simple and clean task management system built using Laravel.
+It allows users to create, update, and delete tasks while tracking their progress through different statuses.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+The goal of this assessment was not to build a complex system, but to deliver a **well-structured, reliable, and maintainable solution** with proper validation, authorization, and testing.
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🚀 Features
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- User Authentication (Laravel Breeze)
+- Create Task
+- Update Task
+- Delete Task
+- Task Status Management (Pending, In Progress, Completed)
+- Task Priority (Low, Medium, High)
+- Due Date Support
+- Clean and responsive UI (Tailwind CSS)
+- Authorization (users can only manage their own tasks)
+- Form validation
+- Feature testing using Pest
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## 🛠️ Tech Stack
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+- **Backend:** Laravel (PHP)
+- **Frontend:** Blade + Tailwind CSS
+- **Authentication:** Laravel Breeze
+- **Database:** SQLite / MySQL
+- **Testing:** Pest (Feature Testing)
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the repository
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/ahsan-ul-alam/simple-task-manager.git
+cd simple-task-manager
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+### 2. Install dependencies
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+composer install
+npm install
+```
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 3. Environment setup
 
-## Security Vulnerabilities
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+### 4. Database setup
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+For SQLite (recommended for quick setup):
+
+```bash
+touch database/database.sqlite
+```
+
+Update `.env`:
+
+```env
+DB_CONNECTION=sqlite
+DB_DATABASE=database/database.sqlite
+```
+
+---
+
+### 5. Run migrations
+
+```bash
+php artisan migrate
+```
+
+---
+
+### 6. Run the application
+
+```bash
+npm run dev
+php artisan serve
+```
+
+Open:
+👉 http://127.0.0.1:8000
+
+---
+
+## 🧪 Testing
+
+This project includes feature tests covering the core task workflow.
+
+### Covered test cases:
+
+- Authenticated user can create a task
+- Task validation (e.g., title is required)
+- User can update their own task
+- User can delete their own task
+- User cannot access or modify another user's task
+
+### Run tests:
+
+```bash
+php artisan test
+```
+
+---
+
+## 🔐 Authorization Logic
+
+- Each task belongs to a specific user
+- Users can only:
+    - View their own tasks
+    - Edit their own tasks
+    - Delete their own tasks
+
+- Unauthorized access is prevented using query constraints
+
+---
+
+## 🧠 Design Decisions
+
+- Used **Blade instead of SPA frameworks** to keep the solution simple and fast
+- Focused on **core functionality and reliability**
+- Used **Eloquent relationships** for clean data handling
+- Applied **validation rules** for all inputs
+- Implemented **feature tests** for critical flows
+- Avoided unnecessary complexity (e.g., roles, teams, notifications)
+
+---
+
+## 📂 Project Structure (Important Parts)
+
+```
+app/
+ └── Http/Controllers/TaskController.php
+
+app/
+ └── Models/Task.php
+
+resources/views/tasks/
+ ├── create.blade.php
+ ├── edit.blade.php
+ └── _form.blade.php
+
+tests/Feature/
+ └── TaskManagementTest.php
+```
+
+---
+
+## 🔮 Possible Improvements
+
+If extended further, the system could include:
+
+- Task filtering (by status)
+- Search functionality
+- Pagination
+- Task assignment (multi-user/team support)
+- Notifications or reminders
+- Activity logs
+- API version (RESTful endpoints)
+
+---
+
+## 🎥 Demo
+
+Loom Video: _https://www.loom.com/share/ae43ce0c7d9645aea1a869030633f29f_
+
+---
+
+## 💬 Final Note
+
+This project focuses on:
+
+- Clean and readable code
+- Proper structure and organization
+- Reliable functionality
+- Real-world development practices
+
+> I focused on building a clean, reliable, and testable system rather than adding unnecessary complexity.
+
+---
+
+## 👨‍💻 Author
+
+**Md. Ahsan Ul Alam**
+Full Stack Web Developer
+Laravel | React.js | Next.js | Tailwind
+
+---
